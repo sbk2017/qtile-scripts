@@ -9,4 +9,4 @@ pip install rich
 ```
 # Screenshot:
 
-![screenshot](/2022-08-18-054327_572x959_scrot.png)
+![screenshot](/2022-08-19-172722_616x1043_scrot.png)
