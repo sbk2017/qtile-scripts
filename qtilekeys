@@ -6,21 +6,23 @@ from rich.table import Table
 from rich.console import Console
 from operator import itemgetter
 
-
-
 sys.path.insert(0, os.path.expanduser('~/.config/qtile/'))
 
 from config import keys
 
 keyslist = []
 table = Table()
-
+arrow = '[red] => [/RED]'
 table.add_column('Modifier', style="cyan")
 table.add_column('Key', style="magenta")
 table.add_column('Desc', style="green")
 
 for key in keys:
-    keyslist.append([' + '.join(key.modifiers), key.key, key.desc])
+    if hasattr(key, 'submappings'):
+        for subkey in key.submappings:
+            keyslist.append(['+'.join(key.modifiers),arrow.join([key.key, subkey.key]), subkey.desc])
+    else:
+        keyslist.append([' + '.join(key.modifiers), key.key, key.desc])
 
 keyslist.sort(key=itemgetter(1))
 
