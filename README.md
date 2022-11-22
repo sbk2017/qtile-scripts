@@ -26,7 +26,23 @@ The default sorting is by keys alphabet.
 ``` --search ``` will only give result of keys that include the search word.
 ### Example:
 ``` bash
-qtilekeys --search layout
+> qtilekeys
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Modifier       ┃ Key         ┃ Desc                                       ┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ mod4           │ 1           │ Switch to group 1                          │
+│ mod4 + shift   │ 1           │ Switch to & move focused window to group 1 │
+│ mod4           │ 2           │ Switch to group 2                          │
+│ mod4 + shift   │ 2           │ Switch to & move focused window to group 2 │
+│ mod4           │ 3           │ Switch to group 3                          │
+│ mod4 + shift   │ 3           │ Switch to & move focused window to group 3 │
+│ mod4           │ 4           │ Switch to group 4                          │
+│ mod4 + shift   │ 4           │ Switch to & move focused window to group 4 │
+```
+Examples using sorting and search options:
+
+``` bash
+> qtilekeys --search layout
 ┏━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ Modifier ┃ Key    ┃ Desc                   ┃
 ┡━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -37,14 +53,15 @@ qtilekeys --search layout
 │ mod4     │ z => s │ Layout shrink          │
 └──────────┴────────┴────────────────────────┘
 
-qtilekeys --search firefox
-┏━━━━━━━━━━┳━━━━━┳━━━━━━━━━━━━━━━━┓
-┃ Modifier ┃ Key ┃ Desc           ┃
-┡━━━━━━━━━━╇━━━━━╇━━━━━━━━━━━━━━━━┩
-│ mod4     │ f   │ Launch firefox │
-└──────────┴─────┴────────────────┘
+> qtilekeys --search volume
+┏━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Modifier ┃ Key   ┃ Desc            ┃
+┡━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ mod4     │ equal │ (+) Volume Up   │
+│ mod4     │ minus │ (-) Volume Down │
+└──────────┴───────┴─────────────────┘
 
-qtilekeys --config --search window
+> qtilekeys --config --search window
 ┏━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ Modifier     ┃ Key   ┃ Desc                                       ┃
 ┡━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
