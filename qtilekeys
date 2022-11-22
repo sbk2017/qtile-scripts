@@ -5,6 +5,7 @@ import sys
 from rich.table import Table
 from rich.console import Console
 from operator import itemgetter
+import click
 
 sys.path.insert(0, os.path.expanduser('~/.config/qtile/'))
 
@@ -12,24 +13,47 @@ from config import keys
 
 keyslist = []
 table = Table()
-arrow = '[red] => [/RED]'
-table.add_column('Modifier', style="cyan")
-table.add_column('Key', style="magenta")
-table.add_column('Desc', style="green")
-
-for key in keys:
-    if hasattr(key, 'submappings'):
-        for subkey in key.submappings:
-            keyslist.append(['+'.join(key.modifiers),arrow.join([key.key, subkey.key]), subkey.desc])
-    else:
-        keyslist.append([' + '.join(key.modifiers), key.key, key.desc])
-
-keyslist.sort(key=itemgetter(1))
-
-for row in keyslist:
-    table.add_row(row[0],row[1],row[2])
-
 console = Console()
-console.print(table)
 
 
+@click.command()
+@click.option('--keys', 'sorting', flag_value='keys', default=True, help='Sort by keys [default]')
+@click.option('--config', 'sorting', flag_value='config', help='Sort as config file')
+@click.option('--search', 'searching', help='Search for word in description')
+def run(sorting, searching):
+    if sorting:
+        create_table(sorting=sorting, searching=searching)
+    else:
+        create_table(sorting='keys', searching=searching)
+
+
+def create_table(sorting, searching):
+    arrow = '[red] => [/RED]'
+    table.add_column('Modifier', style="cyan")
+    table.add_column('Key', style="magenta")
+    table.add_column('Desc', style="green")
+
+    for key in keys:
+        if hasattr(key, 'submappings'):
+            for subkey in key.submappings:
+                keyslist.append(['+'.join(key.modifiers),arrow.join([key.key, subkey.key]), subkey.desc])
+        else:
+            keyslist.append([' + '.join(key.modifiers), key.key, key.desc])
+
+    if sorting == 'keys':
+        keyslist.sort(key=itemgetter(1))
+    
+    if searching :
+        keyslists = [ x for x in keyslist if searching.lower() in x[-1].lower()]
+    else :
+        keyslists = keyslist
+
+    for row in keyslists:
+        table.add_row(row[0],row[1],row[2])
+
+
+    console.print(table)
+
+
+if __name__=="__main__":
+    run()
